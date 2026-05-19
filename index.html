@@ -231,6 +231,30 @@ body {
 @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
 @media (max-width: 768px) { #sidebar { transform: translateX(-100%); } #content { margin-left: 0; padding: 16px; } .matching-container { grid-template-columns: 1fr; } .result-stats { grid-template-columns: 1fr; } .result-actions { flex-direction: column; } }
+/* LEADERBOARD STYLES */
+.leaderboard-modal {
+  display: none; position: fixed; inset: 0; background: rgba(2, 8, 24, 0.95);
+  z-index: 2000; align-items: center; justify-content: center; padding: 20px;
+}
+.leaderboard-card {
+  width: 100%; max-width: 500px; padding: 30px; border: 2px solid var(--neon);
+  box-shadow: 0 0 30px var(--neon-soft); border-radius: var(--radius);
+}
+.leaderboard-header {
+  font-family: 'Orbitron', monospace; color: var(--gold); text-align: center;
+  margin-bottom: 20px; font-size: 1.5rem; letter-spacing: 2px;
+}
+.leaderboard-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+.leaderboard-table th {
+  text-align: left; color: var(--neon); font-size: 0.8rem; padding: 10px;
+  border-bottom: 1px solid var(--neon-border);
+}
+.leaderboard-table td {
+  padding: 12px 10px; font-size: 0.95rem; border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.row-me { background: rgba(0, 212, 255, 0.15); color: var(--neon); font-weight: bold; }
+.rank-icon { width: 25px; display: inline-block; text-align: center; }
+
 </style>
 </head>
 <body>
@@ -278,8 +302,11 @@ body {
           <span class="nav-icon">🚀</span> Pilih Level
         </div>
       </div>
-
+      <div class="nav-item" onclick="openLeaderboard()">
+  <span class="nav-icon">🏆</span> Papan Peringkat
+</div>
       <div class="sidebar-bottom">
+        
         <button class="btn-logout" onclick="doLogout()">🚪 Keluar Game</button>
       </div>
     </div>
@@ -1248,6 +1275,114 @@ function retryQuiz() {
   }
   draw();
 })();
+// Data Bot sebagai saingan
+const botPilots = [
+  { name: "Commander Nova 🛰️", xp: 1450 },
+  { name: "Alien Zog 👾", xp: 920 },
+  { name: "Star Capt. Rex 👨‍🚀", xp: 480 },
+  { name: "Pilot Alpha 🚀", xp: 190 }
+];
+
+// Fungsi untuk mengambil data semua pemain asli yang tersimpan di browser
+function getSavedPlayers() {
+  const players = localStorage.getItem('galactic_players');
+  return players ? JSON.parse(players) : [];
+}
+
+// Fungsi untuk menyimpan/update skor pemain aktif saat ini
+function updateCurrentPlayerScore() {
+  if (typeof playerState === 'undefined' || !playerState.name) return;
+
+  let playersList = getSavedPlayers();
+  let currentName = playerState.name.trim();
+  let currentXp = playerState.xp || 0;
+
+  // Cari apakah nama pemain ini sudah pernah terdaftar sebelumnya
+  let playerExist = playersList.find(p => p.name.toLowerCase() === currentName.toLowerCase());
+
+  if (playerExist) {
+    // Jika sudah ada dan XP barunya lebih tinggi, update skornya
+    if (currentXp > playerExist.xp) {
+      playerExist.xp = currentXp;
+    }
+  } else {
+    // Jika ini pemain baru asli yang mendaftar, masukkan ke list
+    playersList.push({ name: currentName, xp: currentXp });
+  }
+
+  // Simpan kembali daftar pemain asli ke localStorage
+  localStorage.setItem('galactic_players', JSON.stringify(playersList));
+}
+
+// Fungsi utama untuk menampilkan Leaderboard Pemain Asli
+function openLeaderboard() {
+  const modal = document.getElementById('leaderboard-screen');
+  const listContainer = document.getElementById('leaderboard-list');
+  modal.style.display = 'flex';
+  
+  // 1. Sinkronkan dulu skor pemain yang sedang aktif ngerjain soal
+  updateCurrentPlayerScore();
+  
+  // 2. Ambil semua daftar pemain asli
+  let allPlayers = getSavedPlayers();
+  
+  // 3. Urutkan dari pemain dengan XP tertinggi ke terendah
+  allPlayers.sort((a, b) => b.xp - a.xp);
+
+  // 4. Bersihkan tabel lama dan render data baru
+  listContainer.innerHTML = '';
+  
+  if (allPlayers.length === 0) {
+    listContainer.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:20px; color:var(--text-muted);">Belum ada player yang terdaftar.</td></tr>`;
+    return;
+  }
+
+  allPlayers.forEach((player, index) => {
+    let rankDisplay = index + 1;
+    // Beri medali emas, perak, perunggu untuk top 3 pemain asli
+    if (index === 0) rankDisplay = "🥇";
+    if (index === 1) rankDisplay = "🥈";
+    if (index === 2) rankDisplay = "🥉";
+
+    // Cek apakah baris ini adalah akun yang sedang dimainkan sekarang
+    let isCurrentActive = typeof playerState !== 'undefined' && playerState.name && (player.name.toLowerCase() === playerState.name.trim().toLowerCase());
+
+    const tr = document.createElement('tr');
+    if (isCurrentActive) {
+      tr.className = 'row-me'; // Beri warna highlight biru neon untuk baris kamu
+    }
+    
+    // Tampilkan nama asli player dan XP-nya
+    let displayName = isCurrentActive ? `${player.name} (Anda)` : player.name;
+
+    tr.innerHTML = `
+      <td><span class="rank-icon">${rankDisplay}</span></td>
+      <td>${displayName}</td>
+      <td style="font-family:'Share Tech Mono'; color:var(--neon); font-weight:bold;">${player.xp} XP</td>
+    `;
+    listContainer.appendChild(tr);
+  });
+}
+
+function closeLeaderboard() {
+  document.getElementById('leaderboard-screen').style.display = 'none';
+}
+
 </script>
+<div id="leaderboard-screen" class="leaderboard-modal">
+  <div class="leaderboard-card glass">
+    <div class="leaderboard-header">🏆 LEADERBOARD</div>
+    <table class="leaderboard-table">
+      <thead>
+        <tr>
+          <th>RANK</th>
+          <th>PLAYER</th> <th>TOTAL XP</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboard-list"></tbody>
+    </table>
+    <button class="btn-primary" onclick="closeLeaderboard()">KEMBALI KE KOKPIT</button>
+  </div>
+</div>
 </body>
 </html>
