@@ -336,6 +336,7 @@ body {
             </div>
             <div class="quiz-meta-right">
               <button class="quiz-hint-btn" id="hint-btn" onclick="useHint()">💡 Hint (<span id="hint-count">2</span>)</button>
+              <div id="quiz-lives" style="font-size: 1.2rem; margin-right: 15px; letter-spacing: 2px;">❤️❤️❤️❤️❤️</div>
               <div class="quiz-timer" id="q-timer">00:00</div>
             </div>
           </div>
@@ -724,7 +725,6 @@ function startQuiz(levelKey) {
   if (playerState.resumeProgress && playerState.resumeProgress[levelKey] !== undefined) {
     initialIndex = playerState.resumeProgress[levelKey];
     historyAnswers = playerState.savedAnswers[levelKey] || [];
-    
     if (playerState.savedQuestions && playerState.savedQuestions[levelKey]) {
       currentQuiz.questions = playerState.savedQuestions[levelKey];
     } else {
@@ -742,6 +742,9 @@ function startQuiz(levelKey) {
   currentQuiz.correct = 0;
   currentQuiz.wrong = 0;
   
+  // 👇 INI TAMBAHAN RESET NYAWA 👇
+  currentQuiz.lives = 5; 
+
   currentQuiz.questions.forEach((q, idx) => {
     if (historyAnswers[idx]) {
       if (historyAnswers[idx].isCorrect) currentQuiz.correct++;
@@ -752,6 +755,7 @@ function startQuiz(levelKey) {
   switchTab('quiz');
   showQuestion();
   startTimer();
+  updateNyawaUI(); // 👇 TAMPILKAN NYAWA DI ATAS LAYAR 👇
 }
 
 function startTimer() {
@@ -935,6 +939,42 @@ function showQuestion() {
   saveQuizCheckpoint(); 
 }
 
+// ==========================================
+// 👇 MESIN NYAWA TAMBAHAN 👇
+// ==========================================
+function updateNyawaUI() {
+  let nyawaDiv = document.getElementById('quiz-lives');
+  if (!nyawaDiv) {
+    let timerDiv = document.getElementById('q-timer');
+    if(timerDiv) {
+      nyawaDiv = document.createElement('div');
+      nyawaDiv.id = 'quiz-lives';
+      nyawaDiv.style = "font-size: 1.2rem; margin-right: 15px; letter-spacing: 2px;";
+      timerDiv.parentNode.insertBefore(nyawaDiv, timerDiv);
+    }
+  }
+  if(nyawaDiv) {
+    let hearts = '';
+    for(let i=0; i<5; i++) { hearts += (i < currentQuiz.lives) ? '❤️' : '🖤'; }
+    nyawaDiv.innerHTML = hearts;
+  }
+}
+
+function cekNyawa(isCorrect) {
+  if (!isCorrect) {
+    currentQuiz.lives--;
+    updateNyawaUI();
+    
+    if (currentQuiz.lives <= 0) {
+      setTimeout(() => {
+        alert("💥 GAME OVER! Nyawa kamu habis. Coba lagi dari awal level ya!");
+        retryQuiz(); 
+      }, 800);
+    }
+  }
+}
+// ==========================================
+
 function handleMultipleChoice(chosenIdx, clickedBtn, correctIdx) {
   document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
   let qData = currentQuiz.questions[currentQuiz.currentIndex];
@@ -942,6 +982,8 @@ function handleMultipleChoice(chosenIdx, clickedBtn, correctIdx) {
   let isCorrect = (chosenIdx === correctIdx);
   
   if (isCorrect) currentQuiz.correct++; else currentQuiz.wrong++;
+  
+  cekNyawa(isCorrect); // 👇 PENGECEKAN NYAWA 👇
   
   currentQuiz.userAnswers[currentQuiz.currentIndex] = { value: chosenIdx, isCorrect: isCorrect };
   saveQuizCheckpoint();
@@ -992,6 +1034,8 @@ function checkWriteOrOrderAnswer() {
   
   document.getElementById('check-btn').style.display = 'none';
   if(isCorrect) currentQuiz.correct++; else currentQuiz.wrong++;
+  
+  cekNyawa(isCorrect); // 👇 PENGECEKAN NYAWA 👇
   
   currentQuiz.userAnswers[currentQuiz.currentIndex] = { value: savedValue, isCorrect: isCorrect };
   saveQuizCheckpoint();
@@ -1051,6 +1095,9 @@ function selectRightMatch(val, element) {
       currentQuiz.selectedMatchLeft = null;
     }, 500);
     currentQuiz.wrong++;
+    
+    cekNyawa(false); // 👇 PENGECEKAN NYAWA SAAT SALAH JODOHKAN 👇
+    
     document.querySelectorAll('.match-item').forEach(i => { i.classList.add('matched'); i.onclick = null; });
     currentQuiz.userAnswers[currentQuiz.currentIndex] = { value: 'failed', isCorrect: false };
     saveQuizCheckpoint(); renderNavigatorGrid(); triggerFeedback(false, explainText);
