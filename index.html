@@ -285,7 +285,8 @@ body {
         <div class="sidebar-avatar" id="u-avatar">G</div>
         <div class="sidebar-username" id="u-name">Gamer</div>
         <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--white-dim);">
-          <span id="u-rank">Rank: Pilot</span>
+          <div id="u-rank">Rank: Novice</div>
+          <div id="u-level">Level: 1</div>
         </div>
         <div class="xp-bar-wrap">
           <div class="xp-bar" id="u-xp-bar" style="width: 0%"></div>
@@ -465,7 +466,7 @@ const questionsData = {
     { type: "blank", q: "Type the present singular negative form of 'do' (don't / doesn't): \nThis computer ________ work properly.", correct: "doesn't", hint: "Used for singular subjects like 'This computer'.", exp: "Singular nouns use the auxiliary 'doesn't'." }
   ],
   intermediate: [
-    { type: "match", q: "Match the following words with their meanings:", left: ["Recruitment", "Fluency", "Requirement"], right: ["Fluency", "Requirements", "Recruitment"], pairs: { "Recruitment": "Recruitment", "Fluency": "Fluency", "Requirement": "Requirements" }, exp: "Vocabulary matching for common English terms." },
+    { type: "match", q: "Match the following English words with their Indonesian meanings:", left: ["Recruitment", "Fluency", "Requirement"], right: ["Kelancaran", "Persyaratan", "Rekrutmen"], pairs: { "Recruitment": "Rekrutmen", "Fluency": "Kelancaran", "Requirement": "Persyaratan" }, exp: "Vocabulary matching for common English terms." },
     { type: "order", q: "Arrange the words to form a correct Type 1 Conditional sentence:", words: ["hard", "will", "study", "If", "I", "succeed", "I"], correctOrder: ["If", "I", "study", "hard", "I", "will", "succeed"], exp: "Type 1 Conditional structure: If + Simple Present, Simple Future." },
     { type: "mcq", q: "If the network adapter crashes, the system ___ offline.", options: ["will go", "would go", "goes", "gone"], answer: 0, explain: "This is a Type 1 conditional sentence; the main clause uses will + V1." },
     { type: "dialogue", speakerA: "Asep", speakerB: "Fanny", lineA: "Have you finished the software design?", lineB: "No, I haven't. I ___ it since morning.", options: ["am fixing", "have been fixing", "fixed", "was fixing"], correct: 1, hint: "An action that started in the past and continues to the present.", exp: "'Since morning' indicates duration until now; use Present Perfect Continuous." },
@@ -487,7 +488,7 @@ const questionsData = {
     { type: "mcq", q: "Identify the error segment: 'The operators which works during the night shift monitors the server.'", options: ["which", "works", "during", "monitors"], answer: 0, explain: "The error is in 'which'. A human subject ('operators') should use 'who'." },
     { type: "blank", q: "Type the past participle of 'WRITE' for this perfect tense sentence: \nThe engineer has ________ the complete Use Case specification document.", correct: "written", hint: "An irregular Verb 3 form.", exp: "The past participle (V3) of 'write' is 'written'." },
     { type: "mcq", q: "The manager demanded that the network crash ___ investigated immediately.", options: ["is", "was", "be", "been"], answer: 2, explain: "Subjunctive mood ('demanded that...') requires a bare verb form without 'to' ('be')." },
-    { type: "match", q: "Match IT terms with their definitions:", left: ["Troubleshoot", "Deploy", "Maintain"], right: ["Launching software", "Maintaining performance", "Diagnosing issues"], pairs: { "Troubleshoot": "Diagnosing issues", "Deploy": "Launching software", "Maintain": "Maintaining performance" }, exp: "Basic IT terminology and function matching." },
+    { type: "match", q: "Match IT terms with their Indonesian meanings:", left: ["Troubleshoot", "Deploy", "Maintain"], right: ["Memelihara", "Melacak Masalah", "Meluncurkan"], pairs: { "Troubleshoot": "Melacak Masalah", "Deploy": "Meluncurkan", "Maintain": "Memelihara" }, exp: "Basic IT terminology and function matching." },
     { type: "blank", q: "Fill in with the correct preposition: \nComputer engineers must be capable ________ adapting to new technologies quickly.", correct: "of", hint: "The preposition that complements 'capable'.", exp: "'Capable' is always paired with the preposition 'of'." },
     { type: "order", q: "Arrange the following formal phrase:", words: ["central", "recommend", "We", "upgrading", "the", "highly", "system"], correctOrder: ["We", "highly", "recommend", "upgrading", "the", "central", "system"], exp: "Structure of an active formal sentence arrangement." },
     { type: "mcq", q: "By the time the manager arrived, the engineers ___ the network problem.", options: ["solve", "are solving", "had solved", "will solve"], answer: 2, explain: "An action completed before another past action uses Past Perfect Tense (had + V3)." },
@@ -501,7 +502,7 @@ const questionsData = {
     { type: "order", q: "Arrange this formal passive sentence:", words: ["reviewed", "The", "must", "be", "source", "thoroughly", "code"], correctOrder: ["The", "source", "code", "must", "be", "reviewed", "thoroughly"], exp: "Subject + Modal + be + V3 + Adverb." },
     { type: "mcq", q: "Computer engineering candidates ___ possess both technical skill and bilingual agility.", options: ["which", "whom", "who", "whose"], answer: 2, explain: "The relative pronoun as subject for humans is 'who'." },
     { type: "blank", q: "Fill in the correct gerund verb form: \n_________ (document) complex architectures in English requires massive practice.", correct: "documenting", hint: "Verb-ing form as subject.", exp: "The subject of a sentence expressing an activity uses the Gerund format (Verb+ing)." },
-    { type: "match", q: "Match design patterns (Design Patterns):", left: ["Singleton", "Observer", "Factory", "Decorator"], right: ["One Instance", "Publish-Subscribe", "Create Object", "Wrap Object"], pairs: { "Singleton": "One Instance", "Observer": "Publish-Subscribe", "Factory": "Create Object", "Decorator": "Wrap Object" }, exp: "Advanced Object-Oriented Programming (OOP) design patterns." },
+    { type: "match", q: "Match design patterns (Design Patterns) with their Indonesian functions:", left: ["Singleton", "Observer", "Factory", "Decorator"], right: ["Satu Instans", "Membungkus Objek", "Publikasi-Langganan", "Membuat Objek"], pairs: { "Singleton": "Satu Instans", "Observer": "Publikasi-Langganan", "Factory": "Membuat Objek", "Decorator": "Membungkus Objek" }, exp: "Advanced Object-Oriented Programming (OOP) design patterns." },
     { type: "mcq", q: "He speaks about the legacy codebase as though he ___ written it himself.", options: ["has", "had", "have", "was"], answer: 1, explain: "Using 'as though / as if' for unreal past situations is followed by Past Perfect (had)." },
     { type: "dialogue", speakerA: "Admin", speakerB: "SysOp", lineA: "The primary node failed.", lineB: "It is imperative that the master node ___ restarted.", options: ["is", "was", "be", "has been"], correct: 2, hint: "Use pure Subjunctive Mood.", exp: "The phrase 'It is imperative that' requires Subjunctive Mood (base verb/be pure)." },
     { type: "blank", q: "Complete the sentence: \nThe newly developed software framework is prone ___ memory leaks if not handled correctly.", correct: "to", hint: "Fixed preposition for 'prone'.", exp: "The word 'prone' is always paired with the preposition 'to' (vulnerable to)." },
@@ -522,7 +523,7 @@ const questionsData = {
     { type: "order", q: "Arrange the following words into a complete sentence:", words: ["I", "have", "rebooted", "the", "system"], correctOrder: ["I", "have", "rebooted", "the", "system"], exp: "Active sentence structure of Present Perfect (S + have + V3 + O)." },
     { type: "mcq", q: "The new software is ___ better than the previous version.", options: ["significant", "significantly", "significance", "more significant"], answer: 1, explain: "The adverb 'significantly' is used to describe the degree of the comparative 'better'." },
     { type: "dialogue", speakerA: "Manager", speakerB: "Staff", lineA: "Did you finish the report?", lineB: "No, I ___ working on it.", options: ["am still", "still am", "have still", "was still"], correct: 0, hint: "Structure: to be + adverb + V-ing.", exp: "The correct order to emphasize an ongoing activity is 'am still'." },
-    { type: "match", q: "Match the words with their Synonyms:", left: ["Abundant", "Obsolete", "Crucial", "Flawless"], right: ["Vital", "Perfect", "Plentiful", "Outdated"], pairs: { "Abundant": "Plentiful", "Obsolete": "Outdated", "Crucial": "Vital", "Flawless": "Perfect" }, exp: "Advanced vocabulary synonym knowledge." },
+    { type: "match", q: "Match the English words with their Indonesian Synonyms:", left: ["Abundant", "Obsolete", "Crucial", "Flawless"], right: ["Usang", "Sempurna", "Melimpah", "Sangat Penting"], pairs: { "Abundant": "Melimpah", "Obsolete": "Usang", "Crucial": "Sangat Penting", "Flawless": "Sempurna" }, exp: "Advanced vocabulary synonym knowledge." },
     { type: "blank", q: "Type the antonym of 'INCREASE': \nThe company plans to ________ its server budget next year.", correct: ["decrease", "reduce", "lower"], hint: "Meaning 'to make smaller or less'.", exp: "Common antonyms for 'increase' are 'decrease' or 'reduce'." },
     { type: "mcq", q: "Scarcely ___ the office when the phone rang.", options: ["I had entered", "did I enter", "had I entered", "I entered"], answer: 2, explain: "Negative inversion sentences starting with 'Scarcely' use the structure Aux + S + V3 (had I entered)." },
     { type: "order", q: "Arrange the following conditional inversion sentence:", words: ["Should", "you", "need", "assistance", "contact", "me"], correctOrder: ["Should", "you", "need", "assistance", "contact", "me"], exp: "It means the same as 'If you should need assistance, contact me'." },
@@ -530,7 +531,6 @@ const questionsData = {
     { type: "blank", q: "Complete the following sentence: \nThe migration project was completed ahead ________ schedule.", correct: "of", hint: "The preposition paired with 'ahead'.", exp: "The fixed phrase for 'earlier than planned' is 'ahead of schedule'." }
   ]
 };
-
 // Syarat kelulusan minimal (minScore) adalah 80% untuk semua 5 level.
 const levelsData = {
   beginner: { name: "Beginner Level", desc: "Greetings, Grammar Basics & Fundamental IT", badge: "badge-beginner", minScore: 80, xp: 50 },
@@ -631,9 +631,15 @@ function doLogout() {
   }
 }
 
+// ══════════════════════════════════════════
+// TERAPKAN DATA PROFIL & UPDATE RANK UI
+// ══════════════════════════════════════════
 function applyProfileData() {
   document.getElementById('u-name').innerText = playerState.name || "Gamer";
-  document.getElementById('dash-welcome').innerText = `Welcome, ${playerState.name || "Gamer"}.`;
+  
+  // Update ucapan selamat datang di dashboard jika elemennya ada
+  let dashWelcome = document.getElementById('dash-welcome');
+  if(dashWelcome) dashWelcome.innerText = `Welcome, ${playerState.name || "Gamer"}.`;
   
   // LOGIKA AUTO AVATAR BERDASARKAN HURUF PERTAMA NAMA USER
   let hurufPertama = playerState.name ? playerState.name.charAt(0).toUpperCase() : 'G';
@@ -648,6 +654,37 @@ function applyProfileData() {
   document.getElementById('stat-cleared').innerText = `${playerState.completedLevels.length} / 5`;
   document.getElementById('u-total-xp').innerText = `TOTAL ACCUMULATED: ${playerState.xp} XP`;
   
+  // 👇 LOGIKA RANK & LEVEL DINAMIS 👇
+  let totalCleared = playerState.completedLevels.length;
+  let currentRank = "Beginner";
+  let currentLevel = 1;
+
+  if (totalCleared === 1) { 
+    currentRank = "Intermediate"; 
+    currentLevel = 2; 
+  } else if (totalCleared === 2) { 
+    currentRank = "Advanced"; 
+    currentLevel = 3; 
+  } else if (totalCleared === 3) { 
+    currentRank = "Expert"; 
+    currentLevel = 4; 
+  } else if (totalCleared === 4) { 
+    currentRank = "Master"; 
+    currentLevel = 5; 
+  } else if (totalCleared >= 5) { 
+    currentRank = "Space Legend"; // Rank maksimal kalau semua selesai
+    currentLevel = "MAX"; 
+  }
+
+  // Masukkan data Rank & Level ke elemen HTML Sidebar
+  let rankEl = document.getElementById('u-rank');
+  let levelEl = document.getElementById('u-level');
+  
+  if(rankEl) rankEl.innerText = `Rank: ${currentRank}`;
+  if(levelEl) levelEl.innerText = `Level: ${currentLevel}`;
+  // 👆 ================================ 👆
+  
+  // Logika batas XP bar
   let nextCeil = 100;
   if(playerState.xp >= 100) nextCeil = 250;
   if(playerState.xp >= 250) nextCeil = 500;
