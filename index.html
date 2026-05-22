@@ -264,13 +264,13 @@ body {
   <div id="screen-login">
     <div class="login-card glass">
       <div class="login-logo">EnglishPractice</div>
-      <div class="login-sub">Galactic Learning System</div>
+      <div class="login-sub">Practice Your English Skills</div>
       <div class="login-stars-decor">
         <span></span><span></span><span></span><span></span><span></span>
       </div>
-      <label class="login-label" for="name-input">Masukkan Nama Anda</label>
-      <input type="text" id="name-input" class="login-input" placeholder="Nama pemain (lalu tekan Enter)..." maxlength="20" autocomplete="off">
-      <button class="btn-primary" onclick="doLogin()">🚀 Mulai Petualangan</button>
+      <label class="login-label" for="name-input">Enter Your Name</label>
+      <input type="text" id="name-input" class="login-input" placeholder="Player Name" maxlength="20" autocomplete="off">
+      <button class="btn-primary" onclick="doLogin()">🚀 Start Adventure</button>
     </div>
   </div>
 
@@ -299,15 +299,16 @@ body {
           <span class="nav-icon">🪐</span> Dashboard
         </div>
         <div class="nav-item" id="nav-mission" onclick="switchTab('mission')">
-          <span class="nav-icon">🚀</span> Pilih Level
+          <span class="nav-icon">🚀</span> select level
         </div>
       </div>
       <div class="nav-item" onclick="openLeaderboard()">
-  <span class="nav-icon">🏆</span> Papan Peringkat
+  <span class="nav-icon">🏆</span> Leaderboard
 </div>
+
       <div class="sidebar-bottom">
         
-        <button class="btn-logout" onclick="doLogout()">🚪 Keluar Game</button>
+        <button class="btn-logout" onclick="doLogout()">🚪 Logout</button>
       </div>
     </div>
 
@@ -315,7 +316,7 @@ body {
       
       <div id="page-dash" class="tab-page" style="display: block;">
         <h1 class="page-title">Operational Dashboard</h1>
-        <p class="page-sub" id="dash-welcome">Selamat datang kembali, Kapten.</p>
+        <p class="page-sub" id="dash-welcome">Welcome back, <span id="welcome-name">Player</span>!</p>
         
         <div class="stats-grid">
           <div class="stat-card glass" style="--accent: var(--neon);">
@@ -331,25 +332,25 @@ body {
           <div class="stat-card glass" style="--accent: var(--green);">
             <div class="stat-icon">🎯</div>
             <div class="stat-value" id="stat-accuracy">0%</div>
-            <div class="stat-label">Akurasi Soal</div>
+            <div class="stat-label">Question Accuracy</div>
           </div>
           <div class="stat-card glass" style="--accent: var(--purple);">
             <div class="stat-icon">🛰️</div>
             <div class="stat-value" id="stat-cleared">0 / 5</div>
-            <div class="stat-label">Level Selesai</div>
+            <div class="stat-label">Levels Completed</div>
           </div>
         </div>
 
         <div class="progress-section">
-          <div class="section-title">Status Penjelajahan Sektor</div>
+          <div class="section-title">Sector Exploration Status</div>
           <div class="level-cards" id="dash-level-cards">
             </div>
         </div>
       </div>
 
       <div id="page-mission" class="tab-page" style="display: none;">
-        <h1 class="page-title">Pilih Misi Pembelajaran</h1>
-        <p class="page-sub">Selesaikan modul bahasa Inggris antariksa untuk menaikkan peringkat pangkat Anda.</p>
+        <h1 class="page-title">Select Learning Mission</h1>
+        <p class="page-sub">Complete the English module to increase your rank.</p>
         <div class="level-select-grid" id="mission-grid">
           </div>
       </div>
@@ -358,7 +359,7 @@ body {
         <div id="quiz-container">
           <div class="quiz-header">
             <div class="quiz-progress-wrap">
-              <div class="quiz-progress-text" id="q-progress-txt">Pertanyaan 1 dari 15</div>
+              <div class="quiz-progress-text" id="q-progress-txt">Select Learning Mission</div>
               <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="q-progress-fill" style="width: 6.6%"></div></div>
             </div>
             <div class="quiz-meta-right">
@@ -369,7 +370,7 @@ body {
           </div>
           
           <div class="q-nav-container">
-            <div class="q-nav-title">Navigasi Misi Soal</div>
+            <div class="q-nav-title">Question Mission Navigation</div>
             <div id="quiz-navigator-grid" class="q-nav-grid"></div>
           </div>
 
@@ -391,16 +392,16 @@ body {
             <div id="q-write-block" style="display:none;">
               <div class="sentence-display" id="sentence-preview"></div>
               <div class="word-bank" id="sentence-words"></div>
-              <input type="text" class="blank-input" id="text-answer-input" placeholder="Ketik jawaban Anda disini (Tekan Enter)..." style="display:none;">
-              <button class="btn-check" id="check-btn" onclick="checkWriteOrOrderAnswer()">Periksa Jawaban</button>
+              <input type="text" class="blank-input" id="text-answer-input" placeholder="Type your answer here (Press Enter)..." style="display:none;">
+              <button class="btn-check" id="check-btn" onclick="checkWriteOrOrderAnswer()">Check Answer</button>
             </div>
 
             <div class="feedback-box" id="feedback-panel">
-              <div class="feedback-title" id="fb-title">✨ Tepat Sekali!</div>
-              <div class="feedback-text" id="fb-text">Penjelasan tata bahasa akan muncul di sini.</div>
+              <div class="feedback-title" id="fb-title">✨ Correct!</div>
+              <div class="feedback-text" id="fb-text">Grammar explanations will appear here.</div>
             </div>
 
-            <button class="btn-next" id="next-btn" onclick="nextQuestion()">Pertanyaan Selanjutnya ➡️</button>
+            <button class="btn-next" id="next-btn" onclick="nextQuestion()">Next Question ➡️</button>
           </div>
         </div>
       </div>
@@ -408,33 +409,34 @@ body {
       <div id="page-result" class="tab-page" style="display: none;">
         <div class="result-card glass">
           <span class="result-emoji" id="res-emoji">🏆</span>
-          <h2 class="result-title" id="res-title">Misi Berhasil Selesai!</h2>
-          <p class="result-subtitle" id="res-sub">Evaluasi performa navigasi bahasa Anda telah dihitung.</p>
+          <h2 class="result-title" id="res-title">Mission Completed Successfully!</h2>
+          <p class="result-subtitle" id="res-sub">Your language navigation performance has been evaluated.</p>
           
           <div class="result-stats">
             <div class="result-stat">
               <div class="result-stat-val" id="res-score">85%</div>
-              <div class="result-stat-lbl">Akurasi Skor</div>
+              <div class="result-stat-lbl">Score Accuracy</div>
             </div>
             <div class="result-stat">
               <div class="result-stat-val" id="res-time">01:45</div>
-              <div class="result-stat-lbl">Waktu Tempuh</div>
+              <div class="result-stat-lbl">Time Taken</div>
             </div>
             <div class="result-stat">
               <div class="result-stat-val" id="res-correct" style="color:var(--green);">12</div>
-              <div class="result-stat-lbl">Benar</div>
+              <div class="result-stat-lbl">Correct</div>
             </div>
             <div class="result-stat">
               <div class="result-stat-val" id="res-wrong" style="color:var(--red);">3</div>
-              <div class="result-stat-lbl">Salah</div>
+              <div class="result-stat-lbl">Wrong</div>
             </div>
           </div>
 
-          <div class="xp-reward" id="res-xp">⚡ +50 XP Ditambahkan!</div>
+          <div class="xp-reward" id="res-xp">⚡ +50 XP Added!</div>
 
           <div class="result-actions">
-            <button class="btn-outline" onclick="switchTab('mission')">↩️ Kembali ke Misi</button>
-            <button class="btn-primary" onclick="retryQuiz()">🔄 Ulangi Sektor</button>
+            <button class="btn-outline" onclick="switchTab('mission')">↩️ 
+Back to Mission</button>
+            <button class="btn-primary" onclick="retryQuiz()">🔄 Retry Sector</button>
           </div>
         </div>
       </div>
@@ -449,99 +451,93 @@ body {
 // ══════════════════════════════════════════
 const questionsData = {
   beginner: [
-    { type: "mcq", q: "Our company ___ internet cafe services since five years ago.", options: ["provided", "provides", "has provide", "providing"], answer: 0, explain: "'Since five years ago' menunjukkan keterangan waktu lampau spesifik, gunakan Simple Past (V2)." },
-    { type: "dialogue", speakerA: "Andi", speakerB: "Budi", lineA: "Do you enjoy working here?", lineB: "Yes, I ___.", options: ["am", "do", "did", "does"], correct: 1, hint: "Lihat kata bantu tanya 'Do'.", exp: "Pertanyaan 'Do you...?' dijawab dengan 'Yes, I do'." },
-    { type: "blank", q: "Ubah kata dalam kurung ke bentuk lampau (Past Tense): \nYesterday, the operator (fix) ________ the local server crash.", correct: "fixed", hint: "Tambahkan -ed.", exp: "Regular verb lampau dari fix adalah 'fixed'." },
-    { type: "mcq", q: "He ___ computer engineering at the university right now.", options: ["studies", "is studying", "studied", "has studied"], answer: 1, explain: "'Right now' menandakan kejadian sedang berlangsung (Present Continuous)." },
-    { type: "blank", q: "Isi dengan To Be yang tepat (am/is/are): \nThe computer specifications in this internet cafe ________ very high.", correct: "are", hint: "Subjek jamak (specifications).", exp: "Karena specifications berbentuk jamak, to be yang digunakan adalah 'are'." },
-    { type: "mcq", q: "They ___ to the new laboratory last Monday.", options: ["go", "went", "gone", "going"], answer: 1, explain: "Keterangan waktu lampau (last Monday) menggunakan V2 (went)." },
-    { type: "blank", q: "Ketik lawan kata dari kata 'EASY': \nLearning programming is not always ________; it requires practice.", correct: ["hard", "difficult", "complicated"], hint: "Dimulai dari huruf h atau d.", exp: "Lawan kata easy adalah hard / difficult." },
-    { type: "dialogue", speakerA: "Customer", speakerB: "Operator", lineA: "How much is the internet fee?", lineB: "It ___ ten thousand rupiahs per hour.", options: ["is", "are", "am", "was"], correct: 0, hint: "To be untuk kata ganti 'It'.", exp: "'It' menggunakan to be tunggal 'is'." },
-    { type: "mcq", q: "Which sentence is correct?", options: ["She like coding.", "She likes coding.", "She coding.", "She is like coding."], answer: 1, explain: "Subjek tunggal (She) dalam Simple Present membutuhkan verb+s (likes)." },
-    { type: "blank", q: "Lengkapi kalimat berikut: \nI have a computer. This is ________ computer.", correct: "my", hint: "Kata ganti milik untuk orang pertama (I).", exp: "Kata ganti kepemilikan dari I adalah my." },
-    { type: "mcq", q: "We ___ a new database server last night.", options: ["install", "installed", "installing", "installs"], answer: 1, explain: "Keterangan waktu lampau (last night) menggunakan V2 (installed)." },
-    { type: "blank", q: "Isi dengan kata ganti kepemilikan objek (him/her/them): \nThe users are confused. Please help ________.", correct: "them", hint: "Objek untuk banyak orang (The users).", exp: "Kata ganti objek jamak adalah 'them'." },
-    { type: "mcq", q: "The internet connection ___ very fast this morning.", options: ["is", "are", "was", "were"], answer: 2, explain: "Keterangan waktu (this morning) merujuk ke past, subjek tunggal menggunakan 'was'." },
-    { type: "dialogue", speakerA: "Operator", speakerB: "User", lineA: "Where is your keyboard?", lineB: "I ___ it in my backpack yesterday.", options: ["put", "puts", "putting", "have put"], correct: 0, hint: "V2 dari put sama dengan V1-nya.", exp: "V2 dari put tetap 'put' karena termasuk irregular verb." },
-    { type: "blank", q: "Ketik bentuk negatif tunggal present dari 'do' (don't / doesn't): \nThis computer ________ work properly.", correct: "doesn't", hint: "Digunakan untuk subjek tunggal (This computer).", exp: "Benda tunggal menggunakan auxiliary doesn't." }
+    { type: "mcq", q: "Our company ___ internet cafe services since five years ago.", options: ["provided", "provides", "has provide", "providing"], answer: 0, explain: "'Since five years ago' indicates a specific past time reference; use Simple Past (V2)." },
+    { type: "dialogue", speakerA: "Andi", speakerB: "Budi", lineA: "Do you enjoy working here?", lineB: "Yes, I ___.", options: ["am", "do", "did", "does"], correct: 1, hint: "Look at the auxiliary verb 'Do' in the question.", exp: "Questions with 'Do you...?' are answered with 'Yes, I do'." },
+    { type: "blank", q: "Change the words in brackets to the past tense: \nYesterday, the operator (fix) ________ the local server crash.", correct: "fixed", hint: "Add -ed.", exp: "The regular past tense form of 'fix' is 'fixed'." },
+    { type: "mcq", q: "He ___ computer engineering at the university right now.", options: ["studies", "is studying", "studied", "has studied"], answer: 1, explain: "'Right now' indicates an ongoing action in the present (Present Continuous)." },
+    { type: "blank", q: "Change the words in brackets to the opposite of the given word: \nLearning programming is not always ________; it requires practice.", correct: ["hard", "difficult", "complicated"], hint: "It starts with the letter h or d.", exp: "The opposite of 'easy' is 'hard' or 'difficult'." },
+    { type: "dialogue", speakerA: "Customer", speakerB: "Operator", lineA: "How much is the internet fee?", lineB: "It ___ ten thousand rupiahs per hour.", options: ["is", "are", "am", "was"], correct: 0, hint: "Use the to be form for the pronoun 'It'.", exp: "'It' requires the singular form of to be, which is 'is'." },
+    { type: "mcq", q: "Which sentence is correct?", options: ["She like coding.", "She likes coding.", "She coding.", "She is like coding."], answer: 1, explain: "A singular subject (She) in Simple Present requires the verb+s form (likes)." },
+    { type: "blank", q: "Complete the following sentence: \nI have a computer. This is ________ computer.", correct: "my", hint: "Possessive pronoun for the first person (I).", exp: "The possessive pronoun for 'I' is 'my'." },
+    { type: "mcq", q: "We ___ a new database server last night.", options: ["install", "installed", "installing", "installs"], answer: 1, explain: "Past tense of 'install'." },
+    { type: "mcq", q: "The internet connection ___ very fast this morning.", options: ["is", "are", "was", "were"], answer: 2, explain: "The time indicator 'this morning' refers to the past; singular subjects use 'was'." },
+    { type: "dialogue", speakerA: "Operator", speakerB: "User", lineA: "Where is your keyboard?", lineB: "I ___ it in my backpack yesterday.", options: ["put", "puts", "putting", "have put"], correct: 0, hint: "The V2 form of 'put' is the same as its V1 form.", exp: "The V2 form of 'put' remains 'put' because it is an irregular verb." },
+    { type: "blank", q: "Type the present singular negative form of 'do' (don't / doesn't): \nThis computer ________ work properly.", correct: "doesn't", hint: "Used for singular subjects like 'This computer'.", exp: "Singular nouns use the auxiliary 'doesn't'." }
   ],
   intermediate: [
-    { type: "match", q: "Cocokkan kata berikut dengan artinya:", left: ["Recruitment", "Fluency", "Requirement"], right: ["Kefasihan", "Persyaratan", "Perekrutan"], pairs: { "Recruitment": "Perekrutan", "Fluency": "Kefasihan", "Requirement": "Persyaratan" }, exp: "Pencocokan vocabulary bahasa Inggris umum." },
-    { type: "order", q: "Susun kata menjadi kalimat Condition Type 1 yang benar:", words: ["hard", "will", "study", "If", "I", "succeed", "I"], correctOrder: ["If", "I", "study", "hard", "I", "will", "succeed"], exp: "Format conditional type 1: If + Simple Present, Simple Future." },
-    { type: "mcq", q: "If the network adapter crashes, the system ___ offline.", options: ["will go", "would go", "goes", "gone"], answer: 0, explain: "Kalimat pengandaian type 1, main clause menggunakan will + V1." },
-    { type: "dialogue", speakerA: "Asep", speakerB: "Fanny", lineA: "Have you finished the software design?", lineB: "No, I haven't. I ___ it since morning.", options: ["am fixing", "have been fixing", "fixed", "was fixing"], correct: 1, hint: "Kejadian dimulai di masa lalu dan masih berlangsung hingga kini.", exp: "'Since morning' menandakan durasi hingga sekarang, gunakan Present Perfect Continuous." },
-    { type: "mcq", q: "The server room, ___ is located on the second floor, is very cold.", options: ["who", "which", "whose", "where"], answer: 1, explain: "Kata ganti relatif (relative pronoun) untuk benda adalah 'which'." },
-    { type: "blank", q: "Lengkapi kalimat passive voice ini: \nThe database configuration ________ (update) by the network engineer tomorrow.", correct: ["will be updated", "is going to be updated"], hint: "Kalimat pasif masa depan (will be + V3).", exp: "Struktur passive masa depan menggunakan will be + Verb 3 (updated)." },
-    { type: "mcq", q: "I look forward to ___ your computer application project next week.", options: ["see", "seeing", "saw", "seen"], answer: 1, explain: "Frasa 'look forward to' selalu diikuti oleh Gerund (Verb-ing)." },
-    { type: "blank", q: "Ketik kata hubung yang tepat (because/although): \nWe continued working ________ the internet speed was incredibly slow.", correct: "although", hint: "Kata yang bermakna 'meskipun'.", exp: "'Although' digunakan untuk menunjukkan pertentangan." },
-    { type: "order", q: "Susun kalimat tanya ini dengan benar:", words: ["you", "Where", "router", "did", "this", "buy"], correctOrder: ["Where", "did", "you", "buy", "this", "router"], exp: "Format kalimat tanya WH-Question di masa lampau: WH + did + subject + verb1." },
-    { type: "mcq", q: "Choose the correct modal: You ___ back up your files daily to avoid data loss.", options: ["should", "might", "could", "would"], answer: 0, explain: "'Should' digunakan untuk memberikan rekomendasi atau saran yang kuat." },
-    { type: "mcq", q: "While the operator ___ the client PC, the power suddenly went out.", options: ["repairs", "is repairing", "was repairing", "repaired"], answer: 2, explain: "Kejadian yang sedang berlangsung di masa lampau saat kejadian lain terjadi menggunakan Past Continuous." },
-    { type: "blank", q: "Ketik kata hubung perbandingan (than / as): \nThe optical fiber speed is much faster ________ standard copper cables.", correct: "than", hint: "Digunakan bersama kata sifat tingkat komparatif (-er).", exp: "Kalimat komparatif selalu memakai kata hubung 'than'." },
-    { type: "mcq", q: "This is the computer laboratory ___ we learn network architecture.", options: ["which", "where", "when", "who"], answer: 1, explain: "Kata ganti relatif untuk menjelaskan nama tempat di mana sesuatu terjadi adalah 'where'." },
-    { type: "blank", q: "Lengkapi dengan kata penghubung (since / for): \nHe has been managing this tiny internet cafe ________ two years.", correct: "for", hint: "Digunakan untuk menyatakan durasi waktu.", exp: "'For' digunakan untuk menunjukkan rentang waktu (two years)." },
-    { type: "mcq", q: "If I ___ more time, I would build a complete Use Case diagram.", options: ["have", "had", "will have", "have had"], answer: 1, explain: "Conditional Type 2 mensyaratkan if-clause menggunakan Simple Past (V2)." }
+    { type: "match", q: "Match the following words with their meanings:", left: ["Recruitment", "Fluency", "Requirement"], right: ["Fluency", "Requirements", "Recruitment"], pairs: { "Recruitment": "Recruitment", "Fluency": "Fluency", "Requirement": "Requirements" }, exp: "Vocabulary matching for common English terms." },
+    { type: "order", q: "Arrange the words to form a correct Type 1 Conditional sentence:", words: ["hard", "will", "study", "If", "I", "succeed", "I"], correctOrder: ["If", "I", "study", "hard", "I", "will", "succeed"], exp: "Type 1 Conditional structure: If + Simple Present, Simple Future." },
+    { type: "mcq", q: "If the network adapter crashes, the system ___ offline.", options: ["will go", "would go", "goes", "gone"], answer: 0, explain: "This is a Type 1 conditional sentence; the main clause uses will + V1." },
+    { type: "dialogue", speakerA: "Asep", speakerB: "Fanny", lineA: "Have you finished the software design?", lineB: "No, I haven't. I ___ it since morning.", options: ["am fixing", "have been fixing", "fixed", "was fixing"], correct: 1, hint: "An action that started in the past and continues to the present.", exp: "'Since morning' indicates duration until now; use Present Perfect Continuous." },
+    { type: "mcq", q: "The server room, ___ is located on the second floor, is very cold.", options: ["who", "which", "whose", "where"], answer: 1, explain: "The relative pronoun for things/objects is 'which'." },
+    { type: "blank", q: "Complete the following passive voice sentence: \nThe database configuration ________ (update) by the network engineer tomorrow.", correct: ["will be updated", "is going to be updated"], hint: "Future passive voice (will be + V3).", exp: "Future passive structure uses will be + Verb 3 (updated)." },
+    { type: "mcq", q: "I look forward to ___ your computer application project next week.", options: ["see", "seeing", "saw", "seen"], answer: 1, explain: "The phrase 'look forward to' is always followed by a Gerund (Verb-ing)." },
+    { type: "blank", q: "Type the correct conjunction (because/although): \nWe continued working ________ the internet speed was incredibly slow.", correct: "although", hint: "The word meaning 'despite'.", exp: "'Although' is used to show contrast." },
+    { type: "order", q: "Arrange the following question correctly:", words: ["you", "Where", "router", "did", "this", "buy"], correctOrder: ["Where", "did", "you", "buy", "this", "router"], exp: "WH-Question format in the past: WH + did + subject + verb1." },
+    { type: "mcq", q: "Choose the correct modal: You ___ back up your files daily to avoid data loss.", options: ["should", "might", "could", "would"], answer: 0, explain: "'Should' is used to give strong recommendations or advice." },
+    { type: "mcq", q: "While the operator ___ the client PC, the power suddenly went out.", options: ["repairs", "is repairing", "was repairing", "repaired"], answer: 2, explain: "An action in progress in the past when another event occurred uses Past Continuous." },
+    { type: "blank", q: "Type the comparative conjunction (than / as): \nThe optical fiber speed is much faster ________ standard copper cables.", correct: "than", hint: "Used with comparative adjectives (-er).", exp: "Comparative sentences always use the conjunction 'than'." },
+    { type: "mcq", q: "This is the computer laboratory ___ we learn network architecture.", options: ["which", "where", "when", "who"], answer: 1, explain: "The relative pronoun for places where something happens is 'where'." },
+    { type: "blank", q: "Complete with conjunctions (since / for): \nHe has been managing this tiny internet cafe ________ two years.", correct: "for", hint: "Used to express a duration of time.", exp: "'For' is used to indicate a time span (two years)." },
+    { type: "mcq", q: "If I ___ more time, I would build a complete Use Case diagram.", options: ["have", "had", "will have", "have had"], answer: 1, explain: "Type 2 Conditional requires the if-clause to use Simple Past (V2)." }
   ],
   advanced: [
-    { type: "blank", q: "Isi kata benda yang tepat: \nExcellent English proficiency offers advantages and accelerates your career _________.", correct: ["growth", "development", "opportunities", "path", "prospects"], hint: "Artinya perkembangan / pertumbuhan karir.", exp: "Kata 'growth' atau 'development' cocok melengkapi frasa karir." },
-    { type: "dialogue", speakerA: "Interviewer", speakerB: "Applicant", lineA: "Why should we hire you?", lineB: "If you hire me, I ___ document all system codes in English effortlessly.", options: ["can", "could", "would have", "might have"], correct: 0, hint: "Type 1 conditional clause.", exp: "Kondisi kemungkinan riil menggunakan modal present (can)." },
-    { type: "mcq", q: "Identify the error segment: 'The operators which works during the night shift monitors the server.'", options: ["which", "works", "during", "monitors"], answer: 0, explain: "Kesalahannya pada 'which'. Subjek manusia ('operators') seharusnya menggunakan 'who'." },
-    { type: "blank", q: "Tulis bentuk V3 dari kata 'WRITE' untuk kalimat perfect tense ini: \nThe engineer has ________ the complete Use Case specification document.", correct: "written", hint: "Bentuk Verb 3 irreguler.", exp: "Bentuk past participle (V3) dari write adalah written." },
-    { type: "mcq", q: "The manager demanded that the network crash ___ investigated immediately.", options: ["is", "was", "be", "been"], answer: 2, explain: "Subjunctive mood ('demanded that...') membutuhkan verb dasar murni tanpa to ('be')." },
-    { type: "match", q: "Cocokkan istilah IT dengan definisinya:", left: ["Troubleshoot", "Deploy", "Maintain"], right: ["Meluncurkan software", "Merawat performa", "Mendiagnosis masalah"], pairs: { "Troubleshoot": "Mendiagnosis masalah", "Deploy": "Meluncurkan software", "Maintain": "Merawat performa" }, exp: "Pengetahuan kosakata IT." },
-    { type: "mcq", q: "Not only ___ the software bug, but he also optimized the database.", options: ["he fixed", "did he fix", "he has fixed", "fixing he"], answer: 1, explain: "Klausa yang diawali dengan kata negatif 'Not only' mengalami inversi struktur (auxiliary + S + V)." },
-    { type: "blank", q: "Isi dengan preposition yang tepat: \nComputer engineers must be capable ________ adapting to new technologies quickly.", correct: "of", hint: "Preposisi pelengkap untuk kata 'capable'.", exp: "Capable selalu berpasangan dengan preposisi 'of'." },
-    { type: "order", q: "Susun frasa formal berikut:", words: ["central", "recommend", "We", "upgrading", "the", "highly", "system"], correctOrder: ["We", "highly", "recommend", "upgrading", "the", "central", "system"], exp: "Struktur susunan kalimat aktif formal." },
-    { type: "mcq", q: "By the time the manager arrived, the engineers ___ the network problem.", options: ["solve", "are solving", "had solved", "will solve"], answer: 2, explain: "Aksi yang sudah selesai sebelum aksi lain di masa lampau menggunakan Past Perfect Tense (had + V3)." },
-    { type: "mcq", q: "The candidate was rejected not because of technical weakness, but due to lack of ___.", options: ["fluent", "fluency", "fluently", "more fluent"], answer: 1, explain: "Setelah preposisi 'of', yang dibutuhkan adalah kata benda (fluency)." },
-    { type: "blank", q: "Isi preposisi pelengkap dari kata 'invest': \nCompanies are willing to invest ________ tech-savvy graduates with good English.", correct: "in", hint: "Preposisi padanan invest.", exp: "Invest berpasangan dengan preposisi 'in'." },
-    { type: "mcq", q: "The network infrastructure expansion plan ___ by the board next month.", options: ["will review", "is reviewed", "will be reviewed", "has reviewed"], answer: 2, explain: "Kalimat pasif (passive voice) masa depan: will be + verb 3." },
-    { type: "dialogue", speakerA: "Manager", speakerB: "Engineer", lineA: "Did you run Gauss-Seidel numerical simulation?", lineB: "Yes, having ___ the calculations, we recorded the convergent values.", options: ["finish", "finishing", "finished", "been finished"], correct: 2, hint: "Struktur Participle 'Having + V3'.", exp: "Perfect participle aktif menggunakan 'Having + V3' (finished)." },
-    { type: "blank", q: "Lengkapi kata sambung formal kontras (in spite of / furthermore): \n_________ practicing every single day, his verbal communication didn't improve much.", correct: ["in spite of", "inspite of"], hint: "Bermakna meskipun.", exp: "In spite of menunjukkan kontras (meskipun)." }
+    { type: "blank", q: "Type the correct noun: \nExcellent English proficiency offers advantages and accelerates your career _________.", correct: ["growth", "development", "opportunities", "path", "prospects"], hint: "Meaning: career development/growth.", exp: "'Growth' or 'development' is suitable to complete the career phrase." },
+    { type: "dialogue", speakerA: "Interviewer", speakerB: "Applicant", lineA: "Why should we hire you?", lineB: "If you hire me, I ___ document all system codes in English effortlessly.", options: ["can", "could", "would have", "might have"], correct: 0, hint: "Type 1 conditional clause.", exp: "Real-world conditions use the present modal (can)." },
+    { type: "mcq", q: "Identify the error segment: 'The operators which works during the night shift monitors the server.'", options: ["which", "works", "during", "monitors"], answer: 0, explain: "The error is in 'which'. A human subject ('operators') should use 'who'." },
+    { type: "blank", q: "Type the past participle of 'WRITE' for this perfect tense sentence: \nThe engineer has ________ the complete Use Case specification document.", correct: "written", hint: "An irregular Verb 3 form.", exp: "The past participle (V3) of 'write' is 'written'." },
+    { type: "mcq", q: "The manager demanded that the network crash ___ investigated immediately.", options: ["is", "was", "be", "been"], answer: 2, explain: "Subjunctive mood ('demanded that...') requires a bare verb form without 'to' ('be')." },
+    { type: "match", q: "Match IT terms with their definitions:", left: ["Troubleshoot", "Deploy", "Maintain"], right: ["Launching software", "Maintaining performance", "Diagnosing issues"], pairs: { "Troubleshoot": "Diagnosing issues", "Deploy": "Launching software", "Maintain": "Maintaining performance" }, exp: "Basic IT terminology and function matching." },
+    { type: "blank", q: "Fill in with the correct preposition: \nComputer engineers must be capable ________ adapting to new technologies quickly.", correct: "of", hint: "The preposition that complements 'capable'.", exp: "'Capable' is always paired with the preposition 'of'." },
+    { type: "order", q: "Arrange the following formal phrase:", words: ["central", "recommend", "We", "upgrading", "the", "highly", "system"], correctOrder: ["We", "highly", "recommend", "upgrading", "the", "central", "system"], exp: "Structure of an active formal sentence arrangement." },
+    { type: "mcq", q: "By the time the manager arrived, the engineers ___ the network problem.", options: ["solve", "are solving", "had solved", "will solve"], answer: 2, explain: "An action completed before another past action uses Past Perfect Tense (had + V3)." },
+    { type: "mcq", q: "The candidate was rejected not because of technical weakness, but due to lack of ___.", options: ["fluent", "fluency", "fluently", "more fluent"], answer: 1, explain: "After the preposition 'of', a noun is required (fluency)." },
+    { type: "blank", q: "Fill in the preposition that complements 'invest': \nCompanies are willing to invest ________ tech-savvy graduates with good English.", correct: "in", hint: "The preposition that pairs with 'invest'.", exp: "'Invest' is paired with the preposition 'in'." },
+    { type: "mcq", q: "If I ___ known about the security breach, I would not have pushed the code.", options: ["have", "had", "was", "were"], answer: 1, explain: "Type 3 Conditional uses Had + Subject + V3 in the if-clause." }
   ],
   expert: [
-    { type: "mcq", q: "Rarely ___ such an elegant Use Case design in under an hour.", options: ["we see", "do we see", "we saw", "seeing we"], answer: 1, explain: "Kalimat yang diawali adverb negatif (Rarely) wajib menggunakan Inversi (Aux + Subject + Verb)." },
-    { type: "blank", q: "Tulis kata benda turunan dari kata 'RECRUIT' yang berarti proses penyaringan: \nThe English test is an essential phase of the global company's _________.", correct: "recruitment", hint: "Akhiran -ment.", exp: "Bentuk kata benda (noun) dari recruit adalah recruitment." },
-    { type: "order", q: "Susun kalimat pasif formal ini:", words: ["reviewed", "The", "must", "be", "source", "thoroughly", "code"], correctOrder: ["The", "source", "code", "must", "be", "reviewed", "thoroughly"], exp: "Subject + Modal + be + V3 + Adverb." },
-    { type: "mcq", q: "Computer engineering candidates ___ possess both technical skill and bilingual agility.", options: ["which", "whom", "who", "whose"], answer: 2, explain: "Relative pronoun sebagai subjek untuk manusia adalah 'who'." },
-    { type: "blank", q: "Isi dengan bentuk kata kerja gerund yang tepat: \n_________ (document) complex architectures in English requires massive practice.", correct: "documenting", hint: "Verb-ing form sebagai subjek.", exp: "Subjek kalimat dari sebuah aktivitas menggunakan format Gerund (Verb+ing)." },
-    { type: "match", q: "Cocokkan pola desain (Design Patterns):", left: ["Singleton", "Observer", "Factory", "Decorator"], right: ["One Instance", "Publish-Subscribe", "Create Object", "Wrap Object"], pairs: { "Singleton": "One Instance", "Observer": "Publish-Subscribe", "Factory": "Create Object", "Decorator": "Wrap Object" }, exp: "Pola desain Object-Oriented Programming (OOP) tingkat lanjut." },
-    { type: "mcq", q: "He speaks about the legacy codebase as though he ___ written it himself.", options: ["has", "had", "have", "was"], answer: 1, explain: "Penggunaan 'as though / as if' untuk situasi asumsi tidak nyata di masa lampau diikuti oleh Past Perfect (had)." },
-    { type: "dialogue", speakerA: "Admin", speakerB: "SysOp", lineA: "The primary node failed.", lineB: "It is imperative that the master node ___ restarted.", options: ["is", "was", "be", "has been"], correct: 2, hint: "Gunakan Subjunctive Mood murni.", exp: "Frasa 'It is imperative that' membutuhkan Subjunctive Mood (base verb/be murni)." },
-    { type: "blank", q: "Lengkapi kalimat: \nThe newly developed software framework is prone ___ memory leaks if not handled correctly.", correct: "to", hint: "Preposisi tetap untuk 'prone'.", exp: "Kata 'prone' selalu berpasangan dengan preposisi 'to' (rentan terhadap)." },
-    { type: "mcq", q: "___ considering the edge cases, the algorithm performs exceptionally well.", options: ["Even", "Despite", "Albeit", "Notwithstanding"], answer: 1, explain: "Preposisi yang diikuti oleh Verb-ing (considering) untuk menyatakan kontradiksi adalah Despite / In spite of." },
-    { type: "order", q: "Susun kalimat Subjunctive (saran) ini:", words: ["I", "suggest", "that", "he", "update", "the", "logs"], correctOrder: ["I", "suggest", "that", "he", "update", "the", "logs"], exp: "Suggest that + subjek + verb dasar murni tanpa -s/-es." },
-    { type: "mcq", q: "___ you to encounter a fatal server error, please dump the memory trace immediately.", options: ["If", "Should", "Were", "Had"], answer: 2, explain: "Inversi Kondisional Type 2: 'Were + Subject + to + Infinitive'." },
-    { type: "dialogue", speakerA: "Lead", speakerB: "Engineer", lineA: "Will the refactoring process take long?", lineB: "No, by tomorrow morning we ___ finished it.", options: ["will", "would have", "will have", "have"], correct: 2, hint: "Kejadian masa depan yang akan sudah selesai (Future Perfect).", exp: "Penanda waktu 'by tomorrow' menggunakan pola Future Perfect (will have + V3)." },
-    { type: "blank", q: "Lengkapi kalimat: \nHad I known about the security breach, I _________ have pushed the code to production.", correct: ["wouldn't", "would not", "wouldn't have", "would not have"], hint: "Bentuk negatif conditional (3).", exp: "Bentuk Inversi Conditional Type 3 menggunakan would not have + V3." },
-    { type: "mcq", q: "Not only ___ the data center network, but they also maliciously stole the credentials.", options: ["they breached", "did they breach", "they breach", "do they breach"], answer: 1, explain: "Inversi struktur kata saat diawali oleh ekspresi negatif 'Not only' (Auxiliary Verb mendahului Subject)." }
+    { type: "mcq", q: "Rarely ___ such an elegant Use Case design in under an hour.", options: ["we see", "do we see", "we saw", "seeing we"], answer: 1, explain: "Sentences beginning with negative adverbs (Rarely) require Inversion (Aux + Subject + Verb)." },
+    { type: "blank", q: "Type the noun derived from 'RECRUIT' meaning the selection process: \nThe English test is an essential phase of the global company's _________.", correct: "recruitment", hint: "Suffix -ment.", exp: "The noun form of 'recruit' is 'recruitment'." },
+    { type: "order", q: "Arrange this formal passive sentence:", words: ["reviewed", "The", "must", "be", "source", "thoroughly", "code"], correctOrder: ["The", "source", "code", "must", "be", "reviewed", "thoroughly"], exp: "Subject + Modal + be + V3 + Adverb." },
+    { type: "mcq", q: "Computer engineering candidates ___ possess both technical skill and bilingual agility.", options: ["which", "whom", "who", "whose"], answer: 2, explain: "The relative pronoun as subject for humans is 'who'." },
+    { type: "blank", q: "Fill in the correct gerund verb form: \n_________ (document) complex architectures in English requires massive practice.", correct: "documenting", hint: "Verb-ing form as subject.", exp: "The subject of a sentence expressing an activity uses the Gerund format (Verb+ing)." },
+    { type: "match", q: "Match design patterns (Design Patterns):", left: ["Singleton", "Observer", "Factory", "Decorator"], right: ["One Instance", "Publish-Subscribe", "Create Object", "Wrap Object"], pairs: { "Singleton": "One Instance", "Observer": "Publish-Subscribe", "Factory": "Create Object", "Decorator": "Wrap Object" }, exp: "Advanced Object-Oriented Programming (OOP) design patterns." },
+    { type: "mcq", q: "He speaks about the legacy codebase as though he ___ written it himself.", options: ["has", "had", "have", "was"], answer: 1, explain: "Using 'as though / as if' for unreal past situations is followed by Past Perfect (had)." },
+    { type: "dialogue", speakerA: "Admin", speakerB: "SysOp", lineA: "The primary node failed.", lineB: "It is imperative that the master node ___ restarted.", options: ["is", "was", "be", "has been"], correct: 2, hint: "Use pure Subjunctive Mood.", exp: "The phrase 'It is imperative that' requires Subjunctive Mood (base verb/be pure)." },
+    { type: "blank", q: "Complete the sentence: \nThe newly developed software framework is prone ___ memory leaks if not handled correctly.", correct: "to", hint: "Fixed preposition for 'prone'.", exp: "The word 'prone' is always paired with the preposition 'to' (vulnerable to)." },
+    { type: "mcq", q: "___ considering the edge cases, the algorithm performs exceptionally well.", options: ["Even", "Despite", "Albeit", "Notwithstanding"], answer: 1, explain: "The preposition followed by Verb-ing (considering) to express contradiction is Despite / In spite of." },
+    { type: "order", q: "Arrange this Subjunctive (suggestion) sentence:", words: ["I", "suggest", "that", "he", "update", "the", "logs"], correctOrder: ["I", "suggest", "that", "he", "update", "the", "logs"], exp: "Suggest that + subject + bare verb without -s/-es." },
+    { type: "mcq", q: "___ you to encounter a fatal server error, please dump the memory trace immediately.", options: ["If", "Should", "Were", "Had"], answer: 2, explain: "Conditional Inversion Type 2: 'Were + Subject + to + Infinitive'." },
+    { type: "dialogue", speakerA: "Lead", speakerB: "Engineer", lineA: "Will the refactoring process take long?", lineB: "No, by tomorrow morning we ___ finished it.", options: ["will", "would have", "will have", "have"], correct: 2, hint: "A future event that will already be complete (Future Perfect).", exp: "The time marker 'by tomorrow' uses the pattern Future Perfect (will have + V3)." },
+    { type: "blank", q: "Complete the sentence: \nHad I known about the security breach, I _________ have pushed the code to production.", correct: ["wouldn't", "would not", "wouldn't have", "would not have"], hint: "Negative conditional form (Type 3).", exp: "The Inversion form of Conditional Type 3 uses would not have + V3." },
+    { type: "mcq", q: "Not only ___ the data center network, but they also maliciously stole the credentials.", options: ["they breached", "did they breach", "they breach", "do they breach"], answer: 1, explain: "Inversion structure when beginning with negative expressions like 'Not only' (Auxiliary Verb precedes Subject)." }
   ],
   master: [
-    { type: "mcq", q: "If it rains tomorrow, we ___ the football match.", options: ["will cancel", "canceled", "would cancel", "cancel"], answer: 0, explain: "Ini adalah pengandaian Type 1 untuk kemungkinan nyata di masa depan (If + present, will + V1)." },
-    { type: "mcq", q: "She is the woman ___ helped me fix my car yesterday.", options: ["whom", "which", "who", "whose"], answer: 2, explain: "Kata ganti relatif (relative pronoun) penunjuk subjek manusia adalah 'who'." },
-    { type: "mcq", q: "By the time you arrive at the station, the train ___.", options: ["will leave", "will have left", "left", "leaves"], answer: 1, explain: "Pola 'By the time + present' membutuhkan Future Perfect (will have + V3)." },
-    { type: "mcq", q: "I am really looking forward to ___ you at the party.", options: ["see", "seeing", "seen", "saw"], answer: 1, explain: "Frasa 'looking forward to' SELALU diikuti oleh bentuk Gerund (V-ing)." },
-    { type: "mcq", q: "He speaks English very fluently, ___ he?", options: ["doesn't", "isn't", "does", "is"], answer: 0, explain: "Bentuk tag question dari 'speaks' (Simple Present positif) adalah negatif 'doesn't'." },
-    { type: "blank", q: "Isi dengan preposisi yang tepat: \nHe is responsible ________ maintaining the server.", correct: "for", hint: "Preposisi pelengkap dari kata 'responsible'.", exp: "Kata 'responsible' selalu dipasangkan dengan 'for'." },
-    { type: "order", q: "Susun kata berikut menjadi kalimat utuh:", words: ["I", "have", "rebooted", "the", "system"], correctOrder: ["I", "have", "rebooted", "the", "system"], exp: "Susunan kalimat aktif Present Perfect (S + have + V3 + O)." },
-    { type: "mcq", q: "The new software is ___ better than the previous version.", options: ["significant", "significantly", "significance", "more significant"], answer: 1, explain: "Adverbia 'significantly' digunakan untuk menjelaskan seberapa jauh tingkat perbandingan 'better'." },
-    { type: "dialogue", speakerA: "Manager", speakerB: "Staff", lineA: "Did you finish the report?", lineB: "No, I ___ working on it.", options: ["am still", "still am", "have still", "was still"], correct: 0, hint: "Struktur to be + adverb + V-ing.", exp: "Urutan yang benar untuk menegaskan kegiatan masih berlangsung saat ini adalah 'am still'." },
-    { type: "match", q: "Cocokkan dengan persamaan katanya (Synonyms):", left: ["Abundant", "Obsolete", "Crucial", "Flawless"], right: ["Vital", "Perfect", "Plentiful", "Outdated"], pairs: { "Abundant": "Plentiful", "Obsolete": "Outdated", "Crucial": "Vital", "Flawless": "Perfect" }, exp: "Pengetahuan sinonim kosa kata tingkat lanjut." },
-    { type: "blank", q: "Ketik lawan kata dari 'INCREASE': \nThe company plans to ________ its server budget next year.", correct: ["decrease", "reduce", "lower"], hint: "Artinya 'mengurangi'.", exp: "Lawan kata umum dari increase adalah decrease atau reduce." },
-    { type: "mcq", q: "Scarcely ___ the office when the phone rang.", options: ["I had entered", "did I enter", "had I entered", "I entered"], answer: 2, explain: "Bentuk kalimat inversi negatif dari 'Scarcely' memakai struktur Aux + S + V3 (had I entered)." },
-    { type: "order", q: "Susun inversi kalimat pengandaian (conditional) berikut:", words: ["Should", "you", "need", "assistance", "contact", "me"], correctOrder: ["Should", "you", "need", "assistance", "contact", "me"], exp: "Sama artinya dengan 'If you should need assistance, contact me'." },
-    { type: "mcq", q: "I'd rather you ___ the code directly on the production server.", options: ["didn't change", "don't change", "haven't changed", "won't change"], answer: 0, explain: "Frasa 'would rather + subjek' untuk menyatakan preferensi mensyaratkan bentuk Simple Past (didn't change)." },
-    { type: "blank", q: "Lengkapi kalimat berikut: \nThe migration project was completed ahead ________ schedule.", correct: "of", hint: "Preposisi pasangannya ahead.", exp: "Frasa tetap untuk 'lebih cepat dari jadwal' adalah 'ahead of schedule'." }
+    { type: "mcq", q: "If it rains tomorrow, we ___ the football match.", options: ["will cancel", "canceled", "would cancel", "cancel"], answer: 0, explain: "This is a Type 1 conditional for a real possibility in the future (If + present, will + V1)." },
+    { type: "mcq", q: "She is the woman ___ helped me fix my car yesterday.", options: ["whom", "which", "who", "whose"], answer: 2, explain: "The relative pronoun for human subjects is 'who'." },
+    { type: "mcq", q: "By the time you arrive at the station, the train ___.", options: ["will leave", "will have left", "left", "leaves"], answer: 1, explain: "The pattern 'By the time + present' requires the Future Perfect tense (will have + V3)." },
+    { type: "mcq", q: "I am really looking forward to ___ you at the party.", options: ["see", "seeing", "seen", "saw"], answer: 1, explain: "The phrase 'looking forward to' is ALWAYS followed by a Gerund (Verb-ing)." },
+    { type: "mcq", q: "He speaks English very fluently, ___ he?", options: ["doesn't", "isn't", "does", "is"], answer: 0, explain: "The tag question for 'speaks' (positive Simple Present) is the negative auxiliary 'doesn't'." },
+    { type: "blank", q: "Fill in the correct preposition: \nHe is responsible ________ maintaining the server.", correct: "for", hint: "The preposition that complements 'responsible'.", exp: "The word 'responsible' is always paired with 'for'." },
+    { type: "order", q: "Arrange the following words into a complete sentence:", words: ["I", "have", "rebooted", "the", "system"], correctOrder: ["I", "have", "rebooted", "the", "system"], exp: "Active sentence structure of Present Perfect (S + have + V3 + O)." },
+    { type: "mcq", q: "The new software is ___ better than the previous version.", options: ["significant", "significantly", "significance", "more significant"], answer: 1, explain: "The adverb 'significantly' is used to describe the degree of the comparative 'better'." },
+    { type: "dialogue", speakerA: "Manager", speakerB: "Staff", lineA: "Did you finish the report?", lineB: "No, I ___ working on it.", options: ["am still", "still am", "have still", "was still"], correct: 0, hint: "Structure: to be + adverb + V-ing.", exp: "The correct order to emphasize an ongoing activity is 'am still'." },
+    { type: "match", q: "Match the words with their Synonyms:", left: ["Abundant", "Obsolete", "Crucial", "Flawless"], right: ["Vital", "Perfect", "Plentiful", "Outdated"], pairs: { "Abundant": "Plentiful", "Obsolete": "Outdated", "Crucial": "Vital", "Flawless": "Perfect" }, exp: "Advanced vocabulary synonym knowledge." },
+    { type: "blank", q: "Type the antonym of 'INCREASE': \nThe company plans to ________ its server budget next year.", correct: ["decrease", "reduce", "lower"], hint: "Meaning 'to make smaller or less'.", exp: "Common antonyms for 'increase' are 'decrease' or 'reduce'." },
+    { type: "mcq", q: "Scarcely ___ the office when the phone rang.", options: ["I had entered", "did I enter", "had I entered", "I entered"], answer: 2, explain: "Negative inversion sentences starting with 'Scarcely' use the structure Aux + S + V3 (had I entered)." },
+    { type: "order", q: "Arrange the following conditional inversion sentence:", words: ["Should", "you", "need", "assistance", "contact", "me"], correctOrder: ["Should", "you", "need", "assistance", "contact", "me"], exp: "It means the same as 'If you should need assistance, contact me'." },
+    { type: "mcq", q: "I'd rather you ___ the code directly on the production server.", options: ["didn't change", "don't change", "haven't changed", "won't change"], answer: 0, explain: "The phrase 'would rather + subject' to express preference requires the Simple Past form (didn't change)." },
+    { type: "blank", q: "Complete the following sentence: \nThe migration project was completed ahead ________ schedule.", correct: "of", hint: "The preposition paired with 'ahead'.", exp: "The fixed phrase for 'earlier than planned' is 'ahead of schedule'." }
   ]
 };
 
-// Syarat Minimum Kelulusan (minScore) adalah 80% untuk seluruh 5 level.
+// Syarat kelulusan minimal (minScore) adalah 80% untuk semua 5 level.
 const levelsData = {
-  beginner: { name: "Beginner Sektor", desc: "Greetings, Grammar Basics & Fundamental IT", badge: "badge-beginner", minScore: 80, xp: 50 },
-  intermediate: { name: "Intermediate Sektor", desc: "Tenses, Voice, Connectivity & Logic", badge: "badge-intermediate", minScore: 80, xp: 75 },
-  advanced: { name: "Advanced Sektor", desc: "Formal Structure, Inversions & Job Prospects", badge: "badge-advanced", minScore: 80, xp: 100 },
-  expert: { name: "Expert Sektor", desc: "Complex Syntax, Subjunctives & Advanced Conditionals", badge: "badge-expert", minScore: 80, xp: 150 },
-  master: { name: "Master Sektor", desc: "Level 5 - TOEFL/IELTS Standard & Elite IT Vocab", badge: "badge-master", minScore: 80, xp: 200 }
+  beginner: { name: "Beginner Level", desc: "Greetings, Grammar Basics & Fundamental IT", badge: "badge-beginner", minScore: 80, xp: 50 },
+  intermediate: { name: "Intermediate Level", desc: "Tenses, Voice, Connectivity & Logic", badge: "badge-intermediate", minScore: 80, xp: 75 },
+  advanced: { name: "Advanced Level", desc: "Formal Structure, Inversions & Job Prospects", badge: "badge-advanced", minScore: 80, xp: 100 },
+  expert: { name: "Expert Level", desc: "Complex Syntax, Subjunctives & Advanced Conditionals", badge: "badge-expert", minScore: 80, xp: 150 },
+  master: { name: "Master Level", desc: "Level 5 - TOEFL/IELTS Standard & Elite IT Vocab", badge: "badge-master", minScore: 80, xp: 200 }
 };
 
 // ══════════════════════════════════════════
@@ -560,7 +556,7 @@ let currentQuiz = {
   selectedMatchLeft: null, matchesMade: {}, userAnswers: []
 };
 
-// Fungsi Load Game Speseifik Berdasarkan Nama (Multi-user Data)
+// Fungsi untuk Memuat Game Spesifik sesuai Nama Pemain (Data Multi-user)
 function loadGame(username) {
   let userKey = "eq_user_" + username.toLowerCase().trim();
   let saved = localStorage.getItem(userKey);
@@ -573,9 +569,9 @@ function loadGame(username) {
       if(!playerState.resumeProgress) playerState.resumeProgress = {};
       if(!playerState.savedAnswers) playerState.savedAnswers = {};
       if(!playerState.savedQuestions) playerState.savedQuestions = {};
-    } catch(e) { console.error("Data error, membuat baru..."); }
+    } catch(e) { console.error("Data error, membuat data baru..."); }
   } else {
-    // Buat data baru jika nama belum pernah login
+    // Buat data baru jika nama ini belum pernah login sebelumnya
     playerState = { 
       name: username, xp: 0, completedLevels: [], 
       totalQuizzesPlayed: 0, totalQuizzesWon: 0, 
@@ -585,7 +581,7 @@ function loadGame(username) {
   }
 }
 
-// Fungsi Simpan ke LocalStorage Berdasarkan Nama
+// Simpan ke LocalStorage berdasarkan Nama Pemain
 function saveGame() {
   if(!playerState.name) return;
   let userKey = "eq_user_" + playerState.name.toLowerCase().trim();
@@ -594,10 +590,10 @@ function saveGame() {
 
 function doLogin() {
   let input = document.getElementById('name-input').value.trim();
-  if(!input) { alert("Masukkan nama pilot/pemain terlebih dahulu!"); return; }
+  if(!input) { alert("Please enter your name/pilot name first!"); return; } // <- Tampilan UI Inggris
   
-  loadGame(input); // Tarik data Gideon / Nuansa spesifik
-  playerState.name = input; // Pastikan format nama sesuai ketikan terakhir (kapitalisasi)
+  loadGame(input); // Ambil data spesifik player
+  playerState.name = input; // Pastikan format nama sesuai input terakhir (kapitalisasi)
   saveGame();
   showMainLayout();
 }
@@ -614,7 +610,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // EVENT LISTENER ENTER UNTUK JAWABAN ISIAN KOSONG
+  // EVENT LISTENER ENTER UNTUK JAWABAN FILL-IN-THE-BLANK
   document.getElementById('text-answer-input').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -626,10 +622,10 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function doLogout() {
-  if(confirm("Apakah Anda yakin ingin keluar? Progres Anda tersimpan aman sesuai nama Anda.")) {
+  if(confirm("Are you sure you want to log out? Your progress is safely saved with your name.")) { // <- Tampilan UI Inggris
     clearInterval(currentQuiz.timerInterval);
     playerState = { name: "", xp: 0, completedLevels: [], totalQuizzesPlayed: 0, totalQuizzesWon: 0, totalQuestionsAnswered: 0, totalQuestionsCorrect: 0, resumeProgress: {}, savedAnswers: {}, savedQuestions: {} };
-    document.getElementById('name-input').value = ""; // Bersihkan kolom nama
+    document.getElementById('name-input').value = ""; // Kosongkan kolom nama
     document.getElementById('screen-main').classList.remove('active');
     document.getElementById('screen-login').style.display = 'flex';
   }
@@ -637,9 +633,9 @@ function doLogout() {
 
 function applyProfileData() {
   document.getElementById('u-name').innerText = playerState.name || "Gamer";
-  document.getElementById('dash-welcome').innerText = `Selamat datang, ${playerState.name || "Gamer"}.`;
+  document.getElementById('dash-welcome').innerText = `Welcome, ${playerState.name || "Gamer"}.`;
   
-  // LOGIKA AVATAR OTOMATIS BERDASARKAN HURUF PERTAMA NAMA USER
+  // LOGIKA AUTO AVATAR BERDASARKAN HURUF PERTAMA NAMA USER
   let hurufPertama = playerState.name ? playerState.name.charAt(0).toUpperCase() : 'G';
   document.getElementById('u-avatar').innerText = hurufPertama;
   
@@ -707,7 +703,7 @@ function renderDashboardLevels() {
     card.className = `level-card glass ${isLocked ? 'locked-card' : ''}`;
     
     let badgeClass = isCleared ? lvl.badge : "badge-locked";
-    let badgeText = isCleared ? "CLEARED ✓" : (isLocked ? "🔒 TERKUNCI" : "NOT COMPLETED");
+    let badgeText = isCleared ? "CLEARED ✓" : (isLocked ? "🔒 LOCKED" : "NOT COMPLETED");
     
     card.innerHTML = `<span class="level-badge ${badgeClass}">${badgeText}</span><div class="level-name">${lvl.name}</div><div class="level-desc">${lvl.desc}</div>`;
     
@@ -727,12 +723,12 @@ function renderMissionSelection() {
     let card = document.createElement('div');
     card.className = `level-select-card glass ${isLocked ? 'locked-card' : ''}`;
     
-    let statusText = "MULAI MISI 🚀";
-    if(isCleared) statusText = "MISI SELESAI (REPLAY) 🔄";
-    if(isLocked) statusText = "🔒 TERKUNCI (Selesaikan Level Sebelumnya)";
+    let statusText = "START MISSION 🚀";
+    if(isCleared) statusText = "MISSION COMPLETED (REPLAY) 🔄";
+    if(isLocked) statusText = "🔒 LOCKED (Complete Previous Level)";
     
     let icons = ["🪐", "🌌", "🛰️", "🛸", "🌟"];
-    card.innerHTML = `<div class="lsc-icon">${isLocked ? "🔒" : icons[idx]}</div><div class="lsc-name">${lvl.name}</div><div class="lsc-desc">${lvl.desc}<br><b>Min Akurasi Kelulusan: ${lvl.minScore}%</b></div><div class="lsc-status" style="color:${isCleared ? 'var(--green)' : (isLocked ? 'var(--white-dim)' : 'var(--neon)')}">${statusText}</div>`;
+    card.innerHTML = `<div class="lsc-icon">${isLocked ? "🔒" : icons[idx]}</div><div class="lsc-name">${lvl.name}</div><div class="lsc-desc">${lvl.desc}<br><b>Min Passing Accuracy: ${lvl.minScore}%</b></div><div class="lsc-status" style="color:${isCleared ? 'var(--green)' : (isLocked ? 'var(--white-dim)' : 'var(--neon)')}">${statusText}</div>`;
     
     if(!isLocked) { card.onclick = () => { startQuiz(key); }; }
     grid.appendChild(card);
@@ -838,7 +834,7 @@ function showQuestion() {
   
   let allAnswered = true;
   for(let i=0; i<currentQuiz.questions.length; i++) { if(!currentQuiz.userAnswers[i]) allAnswered = false; }
-  document.getElementById('next-btn').innerText = allAnswered ? "Selesaikan Misi 🏁" : "Pertanyaan Selanjutnya ➡️";
+  document.getElementById('next-btn').innerText = allAnswered ? "Complete the Mission 🏁" : "Next Question ➡️";
   
   document.getElementById('hint-btn').disabled = (currentQuiz.hintsLeft <= 0);
   document.getElementById('hint-count').innerText = currentQuiz.hintsLeft;
@@ -864,18 +860,18 @@ function showQuestion() {
   let qData = currentQuiz.questions[currentQuiz.currentIndex];
   let pastAnswer = currentQuiz.userAnswers[currentQuiz.currentIndex];
   
-  document.getElementById('q-progress-txt').innerText = `Pertanyaan ${currentQuiz.currentIndex + 1} dari ${currentQuiz.questions.length}`;
+  document.getElementById('q-progress-txt').innerText = `Question ${currentQuiz.currentIndex + 1} out of ${currentQuiz.questions.length}`;
   let pct = ((currentQuiz.currentIndex + 1) / currentQuiz.questions.length) * 100;
   document.getElementById('q-progress-fill').style.width = `${pct}%`;
   
   let label = document.getElementById('q-type-label');
-  if(qData.type === 'mcq' || qData.type === 'mc') label.innerText = "Pilihan Ganda Antariksa";
-  if(qData.type === 'dialogue') label.innerText = "Transmisi Komunikasi Radio";
-  if(qData.type === 'blank') label.innerText = "Isian Kode Kosong";
-  if(qData.type === 'match') label.innerText = "Matriks Pencocokan Teks";
-  if(qData.type === 'order') label.innerText = "Penyusunan Struktur Kalimat";
+  if(qData.type === 'mcq' || qData.type === 'mc') label.innerText = "Space Multiple Choice";
+  if(qData.type === 'dialogue') label.innerText = "Radio Communication Transmission";
+  if(qData.type === 'blank') label.innerText = "Code Blank Fill-in";
+  if(qData.type === 'match') label.innerText = "Text Matching Matrix";
+  if(qData.type === 'order') label.innerText = "Sentence Structure Arrangement";
   
-  document.getElementById('q-text').innerText = qData.q || "Lengkapi baris komunikasi berikut:";
+  document.getElementById('q-text').innerText = qData.q || "Complete the following communication line:";
   
   let correctIdx = (qData.answer !== undefined) ? qData.answer : qData.correct;
   
@@ -994,7 +990,7 @@ function cekNyawa(isCorrect) {
     
     if (currentQuiz.lives <= 0) {
       setTimeout(() => {
-        alert("💥 GAME OVER! Nyawa kamu habis. Coba lagi dari awal level ya!");
+        alert("💥 GAME OVER! You ran out of lives. Try again from the start of the level!");
         retryQuiz(); 
       }, 800);
     }
@@ -1163,7 +1159,7 @@ function useHint() {
       currentQuiz.hintsLeft--;
     }
   } else {
-    alert(`💡 PETUNJUK: ${qData.hint || qData.explain || qData.exp}`);
+    alert(`💡 HINT: ${qData.hint || qData.explain || qData.exp}`);
     currentQuiz.hintsLeft--;
   }
   document.getElementById('hint-count').innerText = currentQuiz.hintsLeft;
@@ -1172,7 +1168,7 @@ function useHint() {
 function triggerFeedback(isCorrect, explanation) {
   let p = document.getElementById('feedback-panel');
   p.className = `feedback-box show ${isCorrect ? 'correct' : 'wrong'}`;
-  document.getElementById('fb-title').innerText = isCorrect ? "✨ Verifikasi Berhasil!" : "💥 Transmisi Gagal!";
+  document.getElementById('fb-title').innerText = isCorrect ? "✨ The Answer Is Correct" : "💥 The Answer Is Wrong";
   document.getElementById('fb-text').innerText = explanation || "";
   document.getElementById('next-btn').classList.add('show');
 }
@@ -1217,7 +1213,7 @@ function finishQuiz() {
   
   if(isPassed) {
     document.getElementById('res-emoji').innerText = "🏆";
-    document.getElementById('res-title').innerText = "Misi Berhasil Selesai!";
+    document.getElementById('res-title').innerText = "Mission Accomplished!";
     playerState.totalQuizzesWon++;
     
     // HITUNGAN XP BARU (Maks 25, tiap salah dikurang 2)
@@ -1229,12 +1225,12 @@ function finishQuiz() {
     
     playerState.xp += xpEarned;
     
-    document.getElementById('res-xp').innerText = `⚡ +${xpEarned} XP Ditambahkan!`;
+    document.getElementById('res-xp').innerText = `⚡ +${xpEarned} XP Added!`;
     document.getElementById('res-xp').style.display = 'block';
   } else {
     document.getElementById('res-emoji').innerText = "💥";
-    document.getElementById('res-title').innerText = "Misi Gagal";
-    document.getElementById('res-sub').innerText = `Batas kelulusan level adalah ${lvlConfig.minScore}%. Coba lagi!`;
+    document.getElementById('res-title').innerText = "Mission Failed";
+    document.getElementById('res-sub').innerText = `The passing grade for this level is ${lvlConfig.minScore}%. Try again!`;
     document.getElementById('res-xp').style.display = 'none';
   }
   
@@ -1275,6 +1271,7 @@ function retryQuiz() {
   }
   draw();
 })();
+
 // Data Bot sebagai saingan
 const botPilots = [
   { name: "Commander Nova 🛰️", xp: 1450 },
@@ -1283,13 +1280,13 @@ const botPilots = [
   { name: "Pilot Alpha 🚀", xp: 190 }
 ];
 
-// Fungsi untuk mengambil data semua pemain asli yang tersimpan di browser
+// Function to retrieve data of all original players saved in the browser
 function getSavedPlayers() {
   const players = localStorage.getItem('galactic_players');
   return players ? JSON.parse(players) : [];
 }
 
-// Fungsi untuk menyimpan/update skor pemain aktif saat ini
+// Function to save/update the current active player's score
 function updateCurrentPlayerScore() {
   if (typeof playerState === 'undefined' || !playerState.name) return;
 
@@ -1314,7 +1311,7 @@ function updateCurrentPlayerScore() {
   localStorage.setItem('galactic_players', JSON.stringify(playersList));
 }
 
-// Fungsi utama untuk menampilkan Leaderboard Pemain Asli
+// Main function to display the Original Player Leaderboard
 function openLeaderboard() {
   const modal = document.getElementById('leaderboard-screen');
   const listContainer = document.getElementById('leaderboard-list');
@@ -1333,7 +1330,7 @@ function openLeaderboard() {
   listContainer.innerHTML = '';
   
   if (allPlayers.length === 0) {
-    listContainer.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:20px; color:var(--text-muted);">Belum ada player yang terdaftar.</td></tr>`;
+    listContainer.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:20px; color:var(--text-muted);">No players registered yet.</td></tr>`;
     return;
   }
 
@@ -1353,7 +1350,7 @@ function openLeaderboard() {
     }
     
     // Tampilkan nama asli player dan XP-nya
-    let displayName = isCurrentActive ? `${player.name} (Anda)` : player.name;
+    let displayName = isCurrentActive ? `${player.name} (You)` : player.name;
 
     tr.innerHTML = `
       <td><span class="rank-icon">${rankDisplay}</span></td>
@@ -1381,7 +1378,7 @@ function closeLeaderboard() {
       </thead>
       <tbody id="leaderboard-list"></tbody>
     </table>
-    <button class="btn-primary" onclick="closeLeaderboard()">KEMBALI KE KOKPIT</button>
+    <button class="btn-primary" onclick="closeLeaderboard()">RETURN TO COCKPIT</button>
   </div>
 </div>
 </body>
